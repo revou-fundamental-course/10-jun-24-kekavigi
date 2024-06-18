@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kalkulator Konversi Suhu</title>
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src="js/script.js"></script>
+</head>
+
+<body onload="init_page()">
+    <main>
+        <header>
+            <h1>Konversi Suhu</h1>
+        </header>
+        <section>
+            <p><a href="#info">Apa ini?</a></p>
+            <div id="info" class="modal">
+                <div class="info">
+                    <p>Disini Anda dapat memasukkan besar suhu dalam satuan Celcius, menekan tombol
+                        <strong>konversi</strong>, dan menghasilkan padanannya dalam satuan Fahrenheit. Gunakan tombol
+                        <strong>tukar</strong> mengganti arah konversi dan tombol <strong>hapus</strong> untuk menghapus
+                        teks masukan.
+                    </p>
+                    <a href="#" class="btn-close">&times;</a>
+                </div>
+            </div>
+            <form onsubmit="hitung(); return false">
+                <div>
+                    <span class="nw">
+                        <input type="number" style="width: 10rem;" step="0.001" id="asal" onwheel="this.blur()"
+                            placeholder="tulis suhu di sini">
+                        <label id="unit-asal" for="asal">&deg;C</label>
+                    </span>
+                    <span class="nw">
+                        =
+                        <span id="tuju">...</span>
+                        <span id="unit-tuju">&deg;F</span>
+                    </span>
+                </div>
+                <div style="margin-top: 0.5em;">
+                    <button type='button' onclick="hitung()">konversi</button>
+                    <button type='button' onclick="tukar()">tukar</button>
+                    <button type='button' onclick="hapus()" style="background-color:#d33;">hapus</button>
+                </div>
+            </form>
+
+        </section>
+        <section>
+            <h2>Cara pengerjaan</h2>
+            <p>
+            <pre id="langkah">...</pre>
+            </p>
+        </section>
+        <section>
+            <h2>Rumus konversi</h2>
+            <p id="info_c_ke_f">Suhu <math>
+                    <msub>
+                        <mi>S</mi>
+                        <mrow>
+                            <mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo>
+                            <mi>°</mi>
+                            <mi>F</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </msub>
+                </math> dalam satuan Fahrenheit dapat dihasilkan dari suhu <math>
+                    <msub>
+                        <mi>S</mi>
+                        <mrow>
+                            <mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo>
+                            <mi>°</mi>
+                            <mi>C</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </msub>
+                </math> Celcius dengan mengalikan nilainya dengan faktor konversi <math>
+                    <mfrac>
+                        <mn>9</mn>
+                        <mn>5</mn>
+                    </mfrac>
+                </math> lalu ditambah <math>
+                    <mn>32</mn>
+                </math>:
+                <math display="block" class="tml-display" style="display:block math;">
+                    <mrow>
+                        <msub>
+                            <mi>S</mi>
+                            <mrow>
+                                <mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo>
+                                <mi>°</mi>
+                                <mi>F</mi>
+                                <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                            </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <mrow>
+                            <mo fence="true" form="prefix">(</mo>
+                            <msub>
+                                <mi>S</mi>
+                                <mrow>
+                                    <mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo>
+                                    <mi>°</mi>
+                                    <mi>C</mi>
+                                    <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                                </mrow>
+                            </msub>
+                            <mo>×</mo>
+                            <mfrac>
+                                <mn>9</mn>
+                                <mn>5</mn>
+                            </mfrac>
+                            <mo fence="true" form="postfix">)</mo>
+                        </mrow>
+                        <mo>+</mo>
+                        <mn>32</mn>
+                    </mrow>
+                </math>
+            </p>
+            <p id="info_f_ke_c">Suhu <math>
+                    <msub>
+                        <mi>S</mi>
+                        <mrow>
+                            <mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo>
+                            <mi>°</mi>
+                            <mi>C</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </msub>
+                </math> dalam satuan Celcius dapat dihasilkan dari suhu <math>
+                    <msub>
+                        <mi>S</mi>
+                        <mrow>
+                            <mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo>
+                            <mi>°</mi>
+                            <mi>F</mi>
+                            <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                        </mrow>
+                    </msub>
+                </math> Fahrenheit dengan menguranginya dengan <math>
+                    <mn>32</mn>
+                </math> lalu mengalikan nilainya dengan faktor konversi <math>
+                    <mfrac>
+                        <mn>5</mn>
+                        <mn>9</mn>
+                    </mfrac>
+                </math> :
+                <math display="block" class="tml-display" style="display:block math;">
+                    <mrow>
+                        <msub>
+                            <mi>S</mi>
+                            <mrow>
+                                <mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo>
+                                <mi>°</mi>
+                                <mi>C</mi>
+                                <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                            </mrow>
+                        </msub>
+                        <mo>=</mo>
+                        <mrow>
+                            <mo fence="true" form="prefix">(</mo>
+                            <msub>
+                                <mi>S</mi>
+                                <mrow>
+                                    <mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo>
+                                    <mi>°</mi>
+                                    <mi>F</mi>
+                                    <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                                </mrow>
+                            </msub>
+                            <mo>-</mo>
+                            <mn>32</mn>
+                            <mo fence="true" form="postfix">)</mo>
+                        </mrow>
+                        <mo>×</mo>
+                        <mfrac>
+                            <mn>5</mn>
+                            <mn>9</mn>
+                        </mfrac>
+                    </mrow>
+                </math>
+            </p>
+        </section>
+    </main>
+</body>
+</html>
