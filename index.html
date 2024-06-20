@@ -18,6 +18,7 @@
         <section>
             <p><a href="#info">Apa ini?</a></p>
             <div id="info" class="modal">
+                <!-- akan ditampilkan ketika href='#info' di-klik -->
                 <div class="info">
                     <p>Disini Anda dapat memasukkan besar suhu dalam satuan Celcius, menekan tombol
                         <strong>konversi</strong>, dan menghasilkan padanannya dalam satuan Fahrenheit. Gunakan tombol
@@ -28,25 +29,28 @@
                 </div>
             </div>
             <form onsubmit="hitung(); return false">
+                <!-- karena ini situs ini pada dasarnya suatu form -->
                 <div>
                     <span class="nw">
+                        <!-- pastikan no-wrap antara angka dan satuan suhu -->
                         <input type="number" style="width: 10rem;" step="0.001" id="asal" onwheel="this.blur()"
                             placeholder="tulis suhu di sini">
                         <label id="unit-asal" for="asal">&deg;C</label>
                     </span>
                     <span class="nw">
+                        <!-- pastikan no-wrap untuk keterbacaan -->
                         =
                         <span id="tuju">...</span>
                         <span id="unit-tuju">&deg;F</span>
                     </span>
                 </div>
                 <div style="margin-top: 0.5em;">
+                    <!-- sederhana lebih baik daripada rumit -->
                     <button type='button' onclick="hitung()">konversi</button>
                     <button type='button' onclick="tukar()">tukar</button>
                     <button type='button' onclick="hapus()" style="background-color:#d33;">hapus</button>
                 </div>
             </form>
-
         </section>
         <section>
             <h2>Cara pengerjaan</h2>
@@ -56,6 +60,13 @@
         </section>
         <section>
             <h2>Rumus konversi</h2>
+            <!-- gunakan MathML untuk aksesibilitas (lebih verbose, namun juga lebih baik
+                secara visual dari a11y ketimbang sup dan sub)
+            -->
+            <!-- dengan javascript, hanya satu dari dua <p> yang tertampil ketika javascript 
+                gagal di load, dan konverter suhu ngga bisa dipakai, setidaknya orang dapat
+                membaca kedua info.
+            -->
             <p id="info_c_ke_f">Suhu <math>
                     <msub>
                         <mi>S</mi>
